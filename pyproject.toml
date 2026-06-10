@@ -1,0 +1,10 @@
+[project]
+name = "endereyetriangulation"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "keyboard>=0.13.5",
+    "pynput>=1.8.2",
+    "pywin32>=312",
+]
