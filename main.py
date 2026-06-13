@@ -156,17 +156,15 @@ def reset_measurement(_):
     global measurement_taken
     measurement_taken = False
 
+def take_measurement():
+    global measurement_taken
+    if not measurement_taken:
+        add_data_point()
+        solution = system.solve()
+        print("Nether: " + str(((solution[0] * 16 + 4) / 8, (solution[1] * 16 + 4) / 8)) + "\n" +
+              "Overworld: " + str((solution[0] * 16 + 4, solution[1] * 16 + 4)))
+        measurement_taken = True
+
 keyboard.on_release_key("c", reset_measurement)
-
-while running:
-    if keyboard.is_pressed('q'):
-        print("Quit")
-        running = False
-
-    if keyboard.is_pressed('f3'):
-        if keyboard.is_pressed('c'):
-            if not measurement_taken:
-                add_data_point()
-                solution = system.solve()
-                print((solution[0] * 16 + 4, solution[1] * 16 + 4))
-                measurement_taken = True
+keyboard.add_hotkey("f3+c", take_measurement)
+keyboard.wait()
